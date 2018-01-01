@@ -17,7 +17,7 @@ Adafruit_NeoPixel *mPixels;
 
 uint32_t mColor = Adafruit_NeoPixel::Color(0, 0, 0);
 String mColorHtml = "#000000";
-uint8_t mBrightness = 0;
+uint8_t mBrightness = 250;
 
 void handleRoot() {
   for (uint8_t i = 0; i < server.args(); i++) {
