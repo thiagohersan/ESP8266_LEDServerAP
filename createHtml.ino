@@ -3,14 +3,17 @@ uint8_t nColors = sizeof(mColors) / sizeof(mColors[0]);
 
 String createHtml() {
   String mHtml = "";
-  mHtml += "<!DOCTYPE html><html><head><title>#VIBE#</title>";
-  mHtml += "<meta name='viewport' content='width=device-width, initial-scale=1'>";
-  mHtml += "<style> body{width:100vw;margin:0;padding:0;} input{appearance:none;} ";
-  mHtml += ".b{width:100%;height:100%;border:4px #000 solid;} ";
-  mHtml += ".c {width:100%;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;} ";
-  mHtml += ".f {width:23vw;height:23vw;padding:1vw;box-sizing:border-box;} "; 
+  mHtml += "<!DOCTYPE html><html><head><style> ";
+  mHtml += "body{width:100%;margin:0;padding:0;} input{appearance:none;} ";
+  mHtml += ".b{width:100%;height:100%;border:none;border-radius:50%;} ";
+  mHtml += ".c{width:100%;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;} ";
+  mHtml += ".f{width:23vw;height:23vw;padding:1vw;box-sizing:border-box;} ";
   mHtml += "body{background:" + mColorHtml + ";} ";
-  mHtml += ".sf {width:12vw;height:12vw;} </style></head>";
+  mHtml += ".sf{width:12vw;height:12vw;} ";
+  mHtml += ".sb{border: 12px rgb(";
+  mHtml += String(mBrightness) + "," + String(mBrightness) + "," + String(mBrightness);
+  mHtml += ") solid;} ";
+  mHtml += "</style></head>";
 
   mHtml += "<body><div class='c'>";
   for (uint8_t c = 0; c < nColors ; c++) {
@@ -24,11 +27,13 @@ String createHtml() {
   for (uint8_t b = 0; b < 7 ; b++) {
     mHtml += "<form class='f sf' action='/' method='GET'><input type='hidden' name='brightness' value='";
     mHtml += String(b * 42);
-    mHtml += "'><input class='b' type='submit' value='' style='background:rgb(";
+    mHtml += "'><input class='b sb' type='submit' value='' style='background:rgb(";
     mHtml += String(b * 42) + "," + String(b * 42) + "," + String(b * 42);
     mHtml += ")'></form>";
   }
 
-  mHtml += "</div></body></html>";
+  mHtml += "</div></body>";
+  mHtml += "</html>";
   return mHtml;
 }
+

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>#VIBE#</title>
     <style>
       body {
-        width: 100vw;
+        width: 100%;
         margin: 0;
         padding: 0;
       }
@@ -24,33 +23,62 @@
       .b {
         width: 100%;
         height: 100%;
-        border: 4px #000 solid;
+        border:none;
+        border-radius: 50%;
       }
-      body{background:#ff0;}
-      .sf {width:18vw;height:18vw;}
+      body{background:#000;}
+      .sf{width:12vw;height:12vw;}
+      .sb{border: 12px rgb(84,84,84) solid;}
+
     </style>
   </head>
   <body>
     <div class="c">
       <form class="f" action='/' method='GET'>
-        <input type="hidden" name="color" value="0xff0000">
+        <input type="hidden" name="color" value="000000">
+        <input class="b" type='submit' value="" style="background: #000000">
+      </form>
+      <form class="f" action='/' method='GET'>
+        <input type="hidden" name="color" value="ff0000">
         <input class="b" type='submit' value="" style="background: #ff0000">
       </form>
       <form class="f" action='/' method='GET'>
-        <input type="hidden" name="color" value="0xffff00">
-        <input class="b" type='submit' value="" style="background: #ffff00">
-      </form>
-      <form class="f" action='/' method='GET'>
-        <input type="hidden" name="color" value="0x00ff00">
+        <input type="hidden" name="color" value="00ff00">
         <input class="b" type='submit' value="" style="background: #00ff00">
       </form>
       <form class="f" action='/' method='GET'>
-        <input type="hidden" name="color" value="0x0000ff">
+        <input type="hidden" name="color" value="0000ff">
         <input class="b" type='submit' value="" style="background: #0000ff">
       </form>
+
+      <!--- brightness --->
       <form class='f sf' action='/' method='GET'>
-        <input type='hidden' name='brightness' value='63'>
-        <input class='b' type='submit' value='' style='background:rgb(63,63,63)'>
+        <input type='hidden' name='brightness' value='0'>
+        <input class='b sb' type='submit' value='' style='background:rgb(0,0,0)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='42'>
+        <input class='b sb' type='submit' value='' style='background:rgb(42,42,42)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='84'>
+        <input class='b sb' type='submit' value='' style='background:rgb(84,84,84)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='126'>
+        <input class='b sb' type='submit' value='' style='background:rgb(126,126,126)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='168'>
+        <input class='b sb' type='submit' value='' style='background:rgb(168,168,168)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='210'>
+        <input class='b sb' type='submit' value='' style='background:rgb(210,210,210)'>
+      </form>
+      <form class='f sf' action='/' method='GET'>
+        <input type='hidden' name='brightness' value='252'>
+        <input class='b sb' type='submit' value='' style='background:rgb(252,252,252)'>
       </form>
     </div>
   </body>
