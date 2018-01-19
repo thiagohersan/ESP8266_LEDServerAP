@@ -1,4 +1,8 @@
-const char *mColors[] = { "000000", "ff0000", "00ff00", "0000ff", "ff00ff", "ffff00", "00ffff", "ffffff"};
+const char *mColors[] = { "000000", "f91863", "9c27f0", "3f51f5",
+                          "607dfb", "03a9f4", "00ff88", "0cff0c",
+                          "ffc107", "ff9800", "ff8000", "ffffff"
+                        };
+
 uint8_t nColors = sizeof(mColors) / sizeof(mColors[0]);
 
 String createHtml() {
