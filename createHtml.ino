@@ -1,6 +1,6 @@
-const char *mColors[] = { "000000", "f91863", "9c27f0", "3f51f5",
-                          "607dfb", "03a9f4", "00ff88", "0cff0c",
-                          "ffc107", "ff9800", "ff8000", "ffffff"
+const char *mColors[] = { "000000", "ff00ff", "9c27f0", "0000ff",
+                          "3f51f5", "00ffff", "00ff00", "ffcc00",
+                          "ff8000", "ff3d00", "d50000", "ffffff"
                         };
 
 uint8_t nColors = sizeof(mColors) / sizeof(mColors[0]);
