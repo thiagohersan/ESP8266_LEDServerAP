@@ -8,7 +8,7 @@ String createHtml() {
   mHtml += ".b{width:100%;height:100%;border:none;border-radius:50%;} ";
   mHtml += ".c{width:100%;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;} ";
   mHtml += ".f{width:23vw;height:23vw;padding:1vw;box-sizing:border-box;} ";
-  mHtml += "body{background:" + mColorHtml + ";} ";
+  mHtml += "body{background: #" + mColorString + ";} ";
   mHtml += ".sf{width:12vw;height:12vw;} ";
   mHtml += ".sb{border: 12px rgb(";
   mHtml += String(mBrightness) + "," + String(mBrightness) + "," + String(mBrightness);

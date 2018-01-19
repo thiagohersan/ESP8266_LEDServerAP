@@ -2,30 +2,33 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+
 #include <Adafruit_NeoPixel.h>
 
 #include "wifipass.h"
 
-#define LED_PIN 5
-#define NUMPIXELS 24
-
-const char* WiFiAPPSK = "cromaterapia";
-IPAddress WiFiIP(10, 10, 81, 1);
-IPAddress WiFiSubnet(255, 255, 255, 0);
+int LED_PIN = 5;
+int NUMPIXELS = 24;
+String HOSTNAME = "chroma";
 
 ESP8266WebServer server(80);
 
 Adafruit_NeoPixel *mPixels;
 
-uint32_t mColor = Adafruit_NeoPixel::Color(0, 0, 0);
-String mColorHtml = "#000000";
+String mColorString = "000000";
 uint8_t mBrightness = 250;
+
+void handleNotFound() {
+  String message = "404";
+  server.send(404, "text/plain", message);
+}
 
 void handleRoot() {
   for (uint8_t i = 0; i < server.args(); i++) {
     if (server.argName(i).indexOf("color") != -1) {
-      mColor = strtol(server.arg(i).c_str(), NULL, 16);
-      mColorHtml = "#" + server.arg(i);
+      mColorString = server.arg(i);
     }
     else if (server.argName(i).indexOf("brightness") != -1) {
       mBrightness = server.arg(i).toInt();
@@ -36,9 +39,10 @@ void handleRoot() {
 }
 
 void setPixels() {
-
   mPixels = new Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
   mPixels->begin();
+
+  uint32_t mColor = strtol(mColorString.c_str(), NULL, 16);
 
   for (int i = 0; i < NUMPIXELS; i++) {
     mPixels->setPixelColor(i, mColor);
@@ -50,15 +54,21 @@ void setPixels() {
   delete mPixels;
 }
 
-void handleNotFound() {
-  String message = "404";
-  server.send(404, "text/plain", message);
-}
-
 void setup(void) {
   Serial.begin(115200);
-  WiFi.softAPConfig(WiFiIP, WiFiIP, WiFiSubnet);
-  WiFi.softAP(WiFiIP.toString().c_str(), WiFiAPPSK);
+
+  IPAddress ip(192, 168, 0, 200);
+  IPAddress gateway(192, 168, 0, 1);
+  IPAddress subnet(255, 255, 255, 0);
+
+  WiFi.config(ip, gateway, subnet);
+  WiFi.hostname("chroma");
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI, PASS);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
 
   server.on("/", handleRoot);
   server.onNotFound(handleNotFound);
@@ -66,10 +76,20 @@ void setup(void) {
   server.begin();
   Serial.println("HTTP server started\n");
 
+  setupAndStartOTA();
   setPixels();
 }
 
 void loop(void) {
   server.handleClient();
+  ArduinoOTA.handle();
+}
+
+void setupAndStartOTA() {
+  ArduinoOTA.setHostname(HOSTNAME.c_str());
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("OTA Error[%u]: ", error);
+  });
+  ArduinoOTA.begin();
 }
 
