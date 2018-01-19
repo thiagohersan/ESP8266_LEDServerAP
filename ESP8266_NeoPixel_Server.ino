@@ -4,6 +4,8 @@
 #include <ESP8266mDNS.h>
 #include <Adafruit_NeoPixel.h>
 
+#include "wifipass.h"
+
 #define LED_PIN 5
 #define NUMPIXELS 24
 
