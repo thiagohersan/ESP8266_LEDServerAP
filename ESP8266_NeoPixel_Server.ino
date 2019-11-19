@@ -57,8 +57,8 @@ void setPixels() {
 void setup(void) {
   Serial.begin(115200);
 
-  IPAddress ip(192, 168, 0, 200);
-  IPAddress gateway(192, 168, 0, 1);
+  IPAddress ip(10, 10, 81, 120);
+  IPAddress gateway(10, 10, 81, 123);
   IPAddress subnet(255, 255, 255, 0);
 
   WiFi.config(ip, gateway, subnet);
@@ -92,4 +92,3 @@ void setupAndStartOTA() {
   });
   ArduinoOTA.begin();
 }
-
